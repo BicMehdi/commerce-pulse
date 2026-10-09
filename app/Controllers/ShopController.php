@@ -10,15 +10,21 @@ final class ShopController
     public function cart(): void { $cart=new Cart(); Response::view('cart',['title'=>'Ton panier','items'=>$cart->items(),'total'=>$cart->total(),'checkoutKey'=>$cart->key()]); }
     public function add(): void
     {
-        try { (new Cart())->put((int)($_POST['product_id'] ?? 0),(int)($_POST['quantity'] ?? 1),true); Session::flash('Le produit a été ajouté à ton panier.'); }
+        try { (new Cart())->put((int)($_POST['product_id'] ?? 0),$this->quantity(1),true); Session::flash('Le produit a été ajouté à ton panier.'); }
         catch (\DomainException $e) { Session::flash($e->getMessage(),'error'); }
         Response::redirect('/cart');
     }
     public function update(): void
     {
-        try { (new Cart())->put((int)($_POST['product_id'] ?? 0),(int)($_POST['quantity'] ?? 0)); }
+        try { (new Cart())->put((int)($_POST['product_id'] ?? 0),$this->quantity(0)); }
         catch (\DomainException $e) { Session::flash($e->getMessage(),'error'); }
         Response::redirect('/cart');
+    }
+    private function quantity(int $default): int
+    {
+        $quantity=filter_var($_POST['quantity'] ?? $default,FILTER_VALIDATE_INT);
+        if ($quantity===false || $quantity<0 || $quantity>10) throw new \DomainException('Choisis une quantité entière comprise entre 0 et 10.');
+        return $quantity;
     }
     public function checkout(): void
     {

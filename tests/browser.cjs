@@ -114,10 +114,23 @@ const unique = Date.now().toString(36);
     await Promise.all([admin.waitForURL("**/admin/products"), admin.getByRole("button", { name: /Enregistrer le produit/ }).click()]);
     const updated = await (await admin.request.get(base + "/api/products?q=" + encodeURIComponent(productName))).json();
     verify(updated.data[0].price_cents === 4995, "admin edit preserves an exact price in cents");
+    await goto(page, "/products/" + updated.data[0].id);
+    await Promise.all([page.waitForURL("**/cart"), page.getByRole("button", { name: /Ajouter au panier/ }).click()]);
+    await goto(page, "/products/" + product.id);
+    await Promise.all([page.waitForURL("**/cart"), page.getByRole("button", { name: /Ajouter au panier/ }).click()]);
     const row = admin.getByRole("row").filter({ hasText: productName });
     admin.once("dialog", dialog => dialog.accept());
     await Promise.all([admin.waitForNavigation({ waitUntil: "networkidle" }), row.getByRole("button", { name: "Archiver", exact: true }).click()]);
     verify((await (await admin.request.get(base + "/api/products?q=" + encodeURIComponent(productName))).json()).data.length === 0, "archived product disappears from the public catalogue");
+    await goto(page, "/cart");
+    verify(await page.locator(".cart-item").count() === 1, "archiving an item leaves the available cart line visible");
+    verify(await page.getByRole("link", { name: "Panier : 1 articles", exact: true }).isVisible(), "cart badge counts only the available item");
+    verify(await page.getByRole("status").textContent().then(value => value.includes("retiré")), "customer sees why the archived item was removed");
+    await page.getByRole("spinbutton").fill("0");
+    await Promise.all([page.waitForNavigation({ waitUntil: "networkidle" }), page.getByRole("button", { name: "Mettre à jour", exact: true }).click()]);
+    verify(await page.getByRole("heading", { name: "Ton panier attend ses essentiels." }).isVisible(), "zero quantity removes the remaining item");
+    await goto(page, "/products/" + product.id);
+    await Promise.all([page.waitForURL("**/cart"), page.getByRole("button", { name: /Ajouter au panier/ }).click()]);
 
     await goto(admin, orderRoute);
     await admin.getByLabel("Prochain statut").selectOption("cancelled");
@@ -139,6 +152,15 @@ const unique = Date.now().toString(36);
     const responsiveContext = await createContext({ reducedMotion: "reduce" });
     const responsive = await responsiveContext.newPage();
     for (const width of [320, 390, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const route of ["/cart", "/account", orderRoute]) {
+        verify((await goto(page, route)).status() === 200, "customer page loads: " + width + "px " + route);
+        const dimensions = await overflow(page);
+        verify(dimensions.document <= dimensions.viewport + 1, "customer page has no overflow: " + width + "px " + route);
+        if (route === "/cart") verify(await page.locator(".cart-item").count() === 1, "responsive cart includes a real order line: " + width + "px");
+      }
+    }
+    for (const width of [320, 390, 768, 1024, 1440]) {
       await responsive.setViewportSize({ width, height: 900 });
       for (const route of ["/", "/register", "/login", "/products/" + product.id, "/cart"]) {
         verify((await goto(responsive, route)).status() === 200, "responsive page loads: " + width + "px " + route);
@@ -150,13 +172,17 @@ const unique = Date.now().toString(36);
     await goto(responsive, "/");
     verify(await responsive.locator(".orbit-stamp").evaluate(element => getComputedStyle(element).animationName) === "none", "reduced motion stops the decorative rotation");
     verify(await responsive.locator("#hero-title").evaluate(element => getComputedStyle(element).opacity) === "1", "reduced motion keeps all content visible");
+    await responsive.locator("img").evaluateAll(async images => {
+      images.forEach(image => image.loading = "eager");
+      await Promise.all(images.map(image => image.decode()));
+    });
     await responsive.screenshot({ path: path.join(output, "mobile.png"), fullPage: true, animations: "disabled" });
     await goto(responsive, "/register");
     await responsive.screenshot({ path: path.join(output, "register-mobile.png"), fullPage: true, animations: "disabled" });
 
     for (const width of [320, 390, 768, 1024, 1440]) {
       await admin.setViewportSize({ width, height: 900 });
-      for (const route of ["/admin", "/admin/products", "/admin/orders", "/admin/analytics", "/admin/products/new"]) {
+      for (const route of ["/admin", "/admin/products", "/admin/orders", "/admin/analytics", "/admin/products/new", orderRoute]) {
         verify((await goto(admin, route)).status() === 200, "admin responsive page loads: " + width + "px " + route);
         const dimensions = await overflow(admin);
         verify(dimensions.document <= dimensions.viewport + 1, "admin has no page overflow: " + width + "px " + route);
@@ -175,6 +201,16 @@ const unique = Date.now().toString(36);
     await goto(noJs, "/");
     verify(await noJs.locator(".product-card").first().isVisible(), "catalogue works with JavaScript disabled");
     await register(noJs, "browser-no-js");
+    await goto(noJs, "/products/" + product.id);
+    await Promise.all([noJs.waitForURL("**/cart"), noJs.getByRole("button", { name: /Ajouter au panier/ }).click()]);
+    verify(await noJs.getByRole("spinbutton").inputValue() === "1", "cart addition works without JavaScript");
+    await Promise.all([noJs.waitForURL(/\/orders\/\d+$/), noJs.getByRole("button", { name: /Confirmer la commande/ }).click()]);
+    const noJsOrder = new URL(noJs.url()).pathname;
+    verify(await noJs.locator(".status").textContent().then(value => value.includes("À préparer")), "checkout works without JavaScript");
+    await goto(admin, noJsOrder);
+    await admin.getByLabel("Prochain statut").selectOption("cancelled");
+    await Promise.all([admin.waitForNavigation({ waitUntil: "networkidle" }), admin.getByRole("button", { name: "Mettre à jour", exact: true }).click()]);
+    verify((await (await admin.request.get(base + "/api/products")).json()).data.find(item => item.id === product.id).stock === originalStock, "both browser orders restore their stock after cancellation");
     await goto(page, "/account");
     await Promise.all([page.waitForURL(base + "/"), page.getByRole("button", { name: "Se déconnecter", exact: true }).click()]);
     verify(await page.getByRole("link", { name: "Connexion", exact: true }).isVisible(), "customer can log out after checkout");

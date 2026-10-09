@@ -22,7 +22,7 @@ La préférence `prefers-reduced-motion` supprime les animations et transitions.
 
 ## Vérifier
 
-`npm run test:browser` teste les interactions réelles et les parcours client/admin, puis dix routes à 320, 390, 768, 1024 et 1440 pixels. Il vérifie aussi le mode de réduction des animations et une inscription sans JavaScript. Les captures sont écrites dans `test-results/browser/`.
+`npm run test:browser` teste les interactions réelles et les parcours client/admin, puis douze routes à 320, 390, 768, 1024 et 1440 pixels, dont le panier rempli et le suivi de commande. Il vérifie aussi le mode de réduction des animations, l’inscription et la commande sans JavaScript. Les captures sont écrites dans `test-results/browser/`.
 
 Les captures sélectionnées pour le README sont dans `docs/screenshots/`. Elles sont prises avec les mouvements réduits pour rendre tous les éléments visibles de manière stable.
 

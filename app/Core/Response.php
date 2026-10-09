@@ -10,6 +10,7 @@ final class Response
         extract($data, EXTR_SKIP);
         $user = Auth::user();
         $path = rtrim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/') ?: '/';
+        $cartQuantity = $admin ? 0 : (new \App\Services\Cart())->quantity();
         $flash = Session::takeFlash();
         ob_start(); require BASE_PATH . '/views/' . $view . '.php'; $content = ob_get_clean();
         require BASE_PATH . '/views/layout.php';
