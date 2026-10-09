@@ -15,7 +15,7 @@
 <?php foreach ($items as $item): ?>
 <article class="cart-item">
 <a class="cart-art art-<?= e($item['illustration']) ?>" href="/products/<?= (int)$item['id'] ?>">
-<img src="/assets/products/<?= e($item['illustration']) ?>.svg" alt="">
+<img src="<?= e(product_photo($item['illustration'], true)) ?>" alt="">
 </a>
 <div>
 <span class="eyebrow">

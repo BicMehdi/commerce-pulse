@@ -41,7 +41,7 @@
 </select>
 </div>
 <div>
-<label for="illustration">Illustration</label>
+<label for="illustration">Photo du produit</label>
 <select id="illustration" name="illustration">
 <?php foreach (['keyboard'=>'Clavier','lamp'=>'Lampe','bottle'=>'Gourde','notebook'=>'Carnet','headphones'=>'Casque','bag'=>'Sac','stand'=>'Support','mouse'=>'Souris'] as $v=>$l): ?>
 <option value="<?= $v ?>" <?= selected($product['illustration'] ?? '',$v) ?>>

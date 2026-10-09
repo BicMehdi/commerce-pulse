@@ -58,6 +58,9 @@ const unique = Date.now().toString(36);
       await page.waitForFunction(element => element.classList.contains("is-visible"), await item.elementHandle());
     }
     verify(true, "all catalogue sections reveal through real scrolling");
+    await page.waitForFunction(() => [...document.querySelectorAll('img[src*="products/photos/"]')].every(image => image.complete && image.naturalWidth > 0));
+    verify(true, "all product and editorial photos load successfully");
+    verify(await page.locator(".product-card img").evaluateAll(images => images.every(image => image.currentSrc.startsWith(location.origin))), "catalogue photos are served locally");
     await page.evaluate(() => scrollTo(0, 0));
     await page.screenshot({ path: path.join(output, "desktop.png"), fullPage: true, animations: "disabled" });
 
@@ -73,9 +76,11 @@ const unique = Date.now().toString(36);
     assert.ok(product, "demo needs an available product");
     const originalStock = product.stock;
     await goto(page, "/products/" + product.id);
+    verify(await page.locator(".product-detail img").evaluate(image => image.complete && image.naturalWidth > 0), "product detail displays its real photo");
     await page.getByLabel("Quantité", { exact: true }).fill("2");
     await Promise.all([page.waitForURL("**/cart"), page.getByRole("button", { name: /Ajouter au panier/ }).click()]);
     verify(await page.getByRole("spinbutton").inputValue() === "2", "product form adds two units to the cart");
+    verify(await page.locator(".cart-art img").evaluate(image => image.complete && image.naturalWidth > 0), "cart thumbnail loads successfully");
     await page.getByRole("spinbutton").fill("1");
     await Promise.all([page.waitForNavigation({ waitUntil: "networkidle" }), page.getByRole("button", { name: "Mettre à jour" }).click()]);
     verify(await page.getByRole("spinbutton").inputValue() === "1", "cart quantity update survives the enhanced submit state");

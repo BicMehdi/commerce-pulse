@@ -1,0 +1,54 @@
+{
+  "license": "https://unsplash.com/license",
+  "retrieved": "2026-10-10",
+  "photos": [
+    {
+      "key": "keyboard",
+      "author": "Daniel Maquiling",
+      "page": "https://unsplash.com/photos/a-computer-keyboard-sitting-on-top-of-a-black-table-C2Q9pJqE98A",
+      "image": "https://images.unsplash.com/photo-1722445423294-f3bc8317d93b"
+    },
+    {
+      "key": "notebook",
+      "author": "Sasun Bughdaryan",
+      "page": "https://unsplash.com/photos/a-white-pen-rests-on-a-closed-notebook-qvscqcd2t7c",
+      "image": "https://images.unsplash.com/photo-1775590766052-ee31110731f8"
+    },
+    {
+      "key": "bottle",
+      "author": "Karl Köhler",
+      "page": "https://unsplash.com/photos/black-mizu-stainless-steel-tumbler-dGIEMeN2MV8",
+      "image": "https://images.unsplash.com/photo-1544003484-3cd181d17917"
+    },
+    {
+      "key": "lamp",
+      "author": "Luigy Ghost",
+      "page": "https://unsplash.com/photos/a-black-desk-lamp-illuminates-a-wall-fOgLNspEm5I",
+      "image": "https://images.unsplash.com/photo-1774647002242-b2e7c7c97bc5"
+    },
+    {
+      "key": "headphones",
+      "author": "VCOM",
+      "page": "https://unsplash.com/photos/white-headphones-sit-against-a-white-background-C0k_JxvcilU",
+      "image": "https://images.unsplash.com/photo-1742783637429-2452a4caee8c"
+    },
+    {
+      "key": "bag",
+      "author": "Jakob Owens",
+      "page": "https://unsplash.com/photos/selective-focus-photography-of-black-and-brown-leather-backpack-on-rock-BmH09wAkJa8",
+      "image": "https://images.unsplash.com/photo-1547949003-9792a18a2601"
+    },
+    {
+      "key": "stand",
+      "author": "Riekus",
+      "page": "https://unsplash.com/photos/wLXk9eHYE0A",
+      "image": "https://images.unsplash.com/photo-1623251606108-512c7c4a3507"
+    },
+    {
+      "key": "mouse",
+      "author": "Fer Troulik",
+      "page": "https://unsplash.com/photos/a-white-computer-mouse-on-a-white-background-LP3nV76f2TA",
+      "image": "https://images.unsplash.com/photo-1772531606450-0dd023c265d7"
+    }
+  ]
+}

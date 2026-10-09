@@ -8,9 +8,9 @@ Une boutique e-commerce de démonstration avec un back-office et une chaîne d�
 
 ## Une boutique comme un atelier d’objets
 
-Une identité éditoriale dédiée aux essentiels du bureau : papier crème, encre noire, jaune vif et carnet bleu cobalt. La composition mêle grandes lettres, détails de catalogue, objets dessinés en SVG et grille décalée. L’inscription prend la forme d’une affiche ; l’administration reprend les mêmes repères graphiques.
+Une identité éditoriale dédiée aux essentiels du bureau : papier crème, encre noire, jaune vif et accents bleu cobalt. La composition mêle grandes lettres, détails de catalogue, photos de produits et grille décalée. L’accueil superpose des tirages photo ; l’inscription prend la forme d’une affiche ; l’administration reprend les mêmes repères graphiques.
 
-Les effets accompagnent la navigation : objets réactifs au pointeur, relief léger sur les produits, apparitions au défilement, ruban animé et retour visuel sur les boutons. La préférence système de réduction des mouvements est respectée, et le catalogue comme les formulaires restent utilisables sans JavaScript. Aucun service de polices ou d’images externe n’est nécessaire.
+Les effets accompagnent la navigation : objets réactifs au pointeur, relief léger sur les produits, apparitions au défilement, ruban animé et retour visuel sur les boutons. La préférence système de réduction des mouvements est respectée, et le catalogue comme les formulaires restent utilisables sans JavaScript. Les huit photos sont issues d’Unsplash, optimisées en WebP et stockées dans le projet : aucun service de polices ou d’images externe n’est nécessaire à l’exécution. Voir [les crédits photographiques](CREDITS.md).
 
 Voir [les choix de design](docs/DESIGN.md) et [l’écran d’inscription](docs/screenshots/register.png).
 
@@ -82,7 +82,7 @@ php -S 127.0.0.1:8090 -t public public/router.php
 ## Architecture
 
 ```text
-public/         Point d’entrée HTTP, routeur, CSS, JavaScript et SVG originaux
+public/         Point d’entrée HTTP, CSS, JavaScript, SVG et photos WebP locales
 app/Core/       PDO, sessions, authentification, réponses HTTP
 app/Controllers/Coordination des requêtes, contrôles d’accès, vues
 app/Domain/     Validation des produits et transitions des commandes

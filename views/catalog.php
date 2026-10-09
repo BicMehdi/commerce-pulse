@@ -10,9 +10,9 @@
     <div class="hero-scene" data-scene aria-label="Composition de trois objets de bureau : clavier, carnet et gourde">
         <div class="scene-grid" aria-hidden="true"></div>
         <span class="scene-coordinate" aria-hidden="true">CP / ÉTUDE D’OBJETS N° 01</span>
-        <div class="scene-object scene-keyboard" data-depth="1.1"><img src="/assets/products/keyboard.svg" alt="Clavier mécanique"><span>01 — POUR CRÉER</span></div>
-        <div class="scene-object scene-notebook" data-depth="-0.7"><img src="/assets/products/notebook.svg" alt="Carnet de notes"><span>02 — POUR LES IDÉES</span></div>
-        <div class="scene-object scene-bottle" data-depth="0.5"><img src="/assets/products/bottle.svg" alt="Gourde isotherme"><span>03 — POUR BOUGER</span></div>
+        <div class="scene-object scene-keyboard" data-depth="1.1"><img src="/assets/products/photos/keyboard-small.webp" alt="Clavier mécanique"><span>01 — POUR CRÉER</span></div>
+        <div class="scene-object scene-notebook" data-depth="-0.7"><img src="/assets/products/photos/notebook-small.webp" alt="Carnet de notes"><span>02 — POUR LES IDÉES</span></div>
+        <div class="scene-object scene-bottle" data-depth="0.5"><img src="/assets/products/photos/bottle-small.webp" alt="Gourde isotherme"><span>03 — POUR BOUGER</span></div>
         <img class="orbit-stamp" src="/assets/stamp.svg" alt="Moins de distractions, plus d’idées">
         <span class="scene-cross cross-one" aria-hidden="true">+</span><span class="scene-cross cross-two" aria-hidden="true">+</span>
         <span class="scene-measure" aria-hidden="true">DES ESSENTIELS. PAS DE SUPERFLU.</span>
@@ -40,7 +40,7 @@
         <article class="product-card" data-reveal>
             <a class="product-art art-<?= e($p['illustration']) ?>" href="/products/<?= (int)$p['id'] ?>" data-tilt>
                 <span class="object-number" aria-hidden="true">OBJ. <?= str_pad((string)(($page-1)*12+$index+1), 2, '0', STR_PAD_LEFT) ?></span>
-                <img loading="lazy" src="/assets/products/<?= e($p['illustration']) ?>.svg" alt="<?= e($p['name']) ?>">
+                <img loading="lazy" decoding="async" src="<?= e(product_photo($p['illustration'], true)) ?>" srcset="<?= e(product_photo($p['illustration'], true)) ?> 640w, <?= e(product_photo($p['illustration'])) ?> 1200w" sizes="(max-width: 650px) 45vw, (max-width: 1440px) 30vw, 450px" alt="<?= e($p['name']) ?>">
                 <?php if ((int)$p['stock']===0): ?><span class="badge">Épuisé</span><?php elseif ((int)$p['stock']<10): ?><span class="badge">Dernières pièces</span><?php endif; ?>
                 <span class="card-arrow" aria-hidden="true"><?= icon('arrow') ?></span>
             </a>
@@ -54,6 +54,6 @@
 
 <section id="studio" class="studio-note" aria-labelledby="studio-title" data-reveal>
     <div class="studio-copy"><span class="eyebrow">02 / L’ESPRIT COMMERCE PULSE</span><h2 id="studio-title">Faire moins.<br><em>Mais mieux.</em></h2><p>On aime les bureaux qui vivent. Les carnets raturés. Les idées qui partent en balade. Des objets simples, pour faire de la place à ce qui compte.</p><a class="studio-link" href="#collection">Trouver mon prochain essentiel <?= icon('arrow') ?></a></div>
-    <div class="studio-art" aria-hidden="true"><span class="studio-large-type">À TA<br>FAÇON.</span><img src="/assets/products/bag.svg" alt=""><span class="studio-sticker">AU BUREAU.<br>ET AILLEURS.</span></div>
+    <div class="studio-art" aria-hidden="true"><span class="studio-large-type">À TA<br>FAÇON.</span><img src="/assets/products/photos/bag-small.webp" alt=""><span class="studio-sticker">AU BUREAU.<br>ET AILLEURS.</span></div>
 </section>
 <section class="values-strip" aria-label="L’esprit de la collection"><div><span class="value-number">01</span><h3>Utile avant tout.</h3><p>Un objet, une fonction. Le plaisir en plus.</p></div><div><span class="value-number">02</span><h3>Du bureau à la ville.</h3><p>Des essentiels qui changent de décor.</p></div><div><span class="value-number">03</span><h3>À ton rythme.</h3><p>Choisir, ajuster, passer commande.</p></div></section>

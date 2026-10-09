@@ -7,7 +7,7 @@ Vérifié sur Windows avec PHP 8.5.11, PDO SQLite 3.53.4 et Python 3.13.7 :
 - 20 assertions PHP (dont transactions, stock et idempotence) réussies sur une base de test dédiée.
 - 10 tests Python de contrôle/agrégation réussis.
 - 6 tests HTTP client/admin réussis, avec création/modification/archivage de produit et échappement HTML.
-- 137 vérifications Playwright dans Edge réussies : effets au pointeur et au défilement, formulaires, commande, gestion des produits, annulation et restitution du stock, régénération de l’analyse, infobulle du graphique et montants contenus dans leurs cartes.
+- 141 vérifications Playwright dans Edge réussies : chargement des photos locales, effets au pointeur et au défilement, formulaires, commande, gestion des produits, annulation et restitution du stock, régénération de l’analyse, infobulle du graphique et montants contenus dans leurs cartes.
 - Dix routes publiques/admin testées à 320, 390, 768, 1024 et 1440 pixels : aucun débordement horizontal de la page. Les tableaux gardent un défilement interne.
 - Mode de réduction des animations et inscription sans JavaScript vérifiés ; aucune erreur de script ou console relevée. Syntaxe des 34 fichiers PHP et des scripts JavaScript vérifiée.
 

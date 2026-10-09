@@ -1,7 +1,7 @@
 <a class="back-link" href="/#collection">← Retour à la collection</a>
 <section class="product-detail">
 <div class="product-art art-<?= e($product['illustration']) ?>">
-<img src="/assets/products/<?= e($product['illustration']) ?>.svg" alt="<?= e($product['name']) ?>">
+<img src="<?= e(product_photo($product['illustration'])) ?>" srcset="<?= e(product_photo($product['illustration'], true)) ?> 640w, <?= e(product_photo($product['illustration'])) ?> 1200w" sizes="(max-width: 650px) 90vw, 55vw" alt="<?= e($product['name']) ?>">
 </div>
 <div class="product-detail-copy">
 <span class="eyebrow">

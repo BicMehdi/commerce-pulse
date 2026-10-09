@@ -30,7 +30,7 @@
 <tr>
 <td>
 <div class="table-product">
-<img src="/assets/products/<?= e($p['illustration']) ?>.svg" alt="">
+<img src="<?= e(product_photo($p['illustration'], true)) ?>" alt="">
 <strong>
 <?= e($p['name']) ?>
 </strong>

@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 function env(string $key, string $default = ''): string { $value = getenv($key); return $value === false ? $default : $value; }
 function e(mixed $value): string { return htmlspecialchars((string)$value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
+function product_photo(string $key, bool $small = false): string {
+    if (!in_array($key, ['keyboard','lamp','bottle','notebook','headphones','bag','stand','mouse'], true)) $key = 'notebook';
+    return '/assets/products/photos/' . $key . ($small ? '-small' : '') . '.webp';
+}
 function euros(int $cents): string { return number_format($cents / 100, 2, ',', ' ') . ' €'; }
 function csrf_field(): string { return '<input type="hidden" name="_csrf" value="' . e(App\Core\Session::csrf()) . '">'; }
 function selected(mixed $a, mixed $b): string { return (string)$a === (string)$b ? 'selected' : ''; }

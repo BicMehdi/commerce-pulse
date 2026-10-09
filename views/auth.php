@@ -3,7 +3,7 @@
         <span class="eyebrow">CP / L’ESPACE PERSONNEL</span>
         <h1 data-reveal><?= $register?'Les bonnes idées<br>commencent<br><em>ici.</em>':'On reprend<br>là où tu<br><em>en étais.</em>' ?></h1>
         <p>Un espace pour tes objets, tes commandes<br>et la suite de ta journée.</p>
-        <div class="auth-object" data-depth="0.7"><img src="/assets/products/notebook.svg" alt="Carnet bleu pour noter ses idées"></div>
+        <div class="auth-object" data-depth="0.7"><img src="/assets/products/photos/notebook-small.webp" alt="Carnet et stylo sur fond jaune"></div>
         <span class="auth-poster-foot">COMMERCE PULSE <span>FAIS DE LA PLACE.</span></span>
     </div>
     <div class="auth-form" data-reveal>

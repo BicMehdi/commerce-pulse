@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#eceadf">
     <title><?= e($title ?? 'Commerce Pulse') ?> · Commerce Pulse</title>
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="/assets/app.css?v=2"><script src="/assets/app.js?v=2" defer></script>
+    <link rel="stylesheet" href="/assets/app.css?v=3"><script src="/assets/app.js?v=2" defer></script>
 </head>
 <body class="<?= $admin ? 'admin-shell' : 'shop-shell' ?>">
 <a href="#main" class="skip-link">Aller au contenu</a><div class="reading-progress" aria-hidden="true"></div>
