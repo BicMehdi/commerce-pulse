@@ -35,4 +35,3 @@ document.querySelectorAll("canvas[data-sales-chart]").forEach(canvas => {
   };
   const observer = new ResizeObserver(draw); observer.observe(canvas);
 });
-

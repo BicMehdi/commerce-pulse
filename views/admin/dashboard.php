@@ -1,3 +1,94 @@
-<div class="admin-title"><div><span class="eyebrow">COMMERCE PULSE</span><h1>Vue d’ensemble</h1><p class="muted">L’activité de la boutique, en un coup d’œil.</p></div><a class="button" href="/admin/products/new">Ajouter un produit +</a></div>
-<div class="kpi-grid"><article><span>Valeur commandée</span><strong><?= euros($stats['revenue']) ?></strong><small>Commandes non annulées · tout l’historique</small></article><article><span>Commandes</span><strong><?= $stats['orders'] ?></strong><small>Tous statuts confondus</small></article><article><span>À traiter</span><strong><?= $stats['pending'] ?></strong><small>À préparer ou en préparation</small></article><article><span>Stocks à surveiller</span><strong><?= $stats['lowStock'] ?></strong><small>Produits actifs avec moins de 10 unités</small></article></div>
-<div class="dashboard-grid"><section class="panel"><div class="section-heading"><h2>Dernières commandes</h2><a href="/admin/orders">Tout voir →</a></div><div class="table-scroll"><table><thead><tr><th>Commande</th><th>Client</th><th>Statut</th><th>Montant</th></tr></thead><tbody><?php foreach ($recent as $o): ?><tr><td><a href="/orders/<?= (int)$o['id'] ?>">#<?= str_pad((string)$o['id'],4,'0',STR_PAD_LEFT) ?></a></td><td><?= e($o['customer_name']) ?></td><td><span class="status <?= e($o['status']) ?>"><?= status_label($o['status']) ?></span></td><td><?= euros((int)$o['total_cents']) ?></td></tr><?php endforeach; ?></tbody></table></div></section><section class="panel"><h2>Suivi des stocks</h2><p class="muted small">Les quatre références les moins stockées.</p><?php foreach ($low as $p): ?><a class="stock-row" href="/admin/products/<?= (int)$p['id'] ?>/edit"><span><?= e($p['name']) ?></span><strong><?= (int)$p['stock'] ?> unités</strong></a><?php endforeach; ?><a class="button secondary full" href="/admin/analytics">Explorer les ventes <?= icon('chart') ?></a></section></div>
+<div class="admin-title">
+<div>
+<span class="eyebrow">COMMERCE PULSE</span>
+<h1>Vue d’ensemble</h1>
+<p class="muted">L’activité de la boutique, en un coup d’œil.</p>
+</div>
+<a class="button" href="/admin/products/new">Ajouter un produit +</a>
+</div>
+<div class="kpi-grid">
+<article>
+<span>Valeur commandée</span>
+<strong>
+<?= euros($stats['revenue']) ?>
+</strong>
+<small>Commandes non annulées · tout l’historique</small>
+</article>
+<article>
+<span>Commandes</span>
+<strong>
+<?= $stats['orders'] ?>
+</strong>
+<small>Tous statuts confondus</small>
+</article>
+<article>
+<span>À traiter</span>
+<strong>
+<?= $stats['pending'] ?>
+</strong>
+<small>À préparer ou en préparation</small>
+</article>
+<article>
+<span>Stocks à surveiller</span>
+<strong>
+<?= $stats['lowStock'] ?>
+</strong>
+<small>Produits actifs avec moins de 10 unités</small>
+</article>
+</div>
+<div class="dashboard-grid">
+<section class="panel">
+<div class="section-heading">
+<h2>Dernières commandes</h2>
+<a href="/admin/orders">Tout voir →</a>
+</div>
+<div class="table-scroll">
+<table>
+<thead>
+<tr>
+<th>Commande</th>
+<th>Client</th>
+<th>Statut</th>
+<th>Montant</th>
+</tr>
+</thead>
+<tbody>
+<?php foreach ($recent as $o): ?>
+<tr>
+<td>
+<a href="/orders/<?= (int)$o['id'] ?>">#<?= str_pad((string)$o['id'],4,'0',STR_PAD_LEFT) ?>
+</a>
+</td>
+<td>
+<?= e($o['customer_name']) ?>
+</td>
+<td>
+<span class="status <?= e($o['status']) ?>">
+<?= status_label($o['status']) ?>
+</span>
+</td>
+<td>
+<?= euros((int)$o['total_cents']) ?>
+</td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+</table>
+</div>
+</section>
+<section class="panel">
+<h2>Suivi des stocks</h2>
+<p class="muted small">Les quatre références les moins stockées.</p>
+<?php foreach ($low as $p): ?>
+<a class="stock-row" href="/admin/products/<?= (int)$p['id'] ?>/edit">
+<span>
+<?= e($p['name']) ?>
+</span>
+<strong>
+<?= (int)$p['stock'] ?> unités</strong>
+</a>
+<?php endforeach; ?>
+<a class="button secondary full" href="/admin/analytics">Explorer les ventes <?= icon('chart') ?>
+</a>
+</section>
+</div>
