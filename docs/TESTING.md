@@ -1,5 +1,16 @@
 # Vérification
 
+## Résultat local du 10 octobre 2026
+
+Vérifié sur Windows avec PHP 8.5.11, PDO SQLite 3.53.4 et Python 3.13.7 :
+
+- 20 assertions PHP (dont transactions, stock et idempotence) réussies sur une base de test dédiée.
+- 10 tests Python de contrôle/agrégation réussis.
+- 6 tests HTTP client/admin réussis, avec création/modification/archivage de produit et échappement HTML.
+- Syntaxe PHP/JavaScript vérifiée ; contrôle navigateur Edge sur desktop et mobile : aucune erreur console détectée ni débordement horizontal sur la page mobile.
+
+La configuration Compose est valide. Le moteur Docker Desktop n’a pas démarré sur cette machine ; le build Docker et les tests MySQL n’ont donc pas été exécutés localement. Le workflow GitHub Actions est préparé, mais son résultat reste à vérifier après publication.
+
 ## Couches testées
 
 - PHP : validation des montants/stock et transitions d’états.
