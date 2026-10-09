@@ -5,11 +5,19 @@ permissions:
 jobs:
   integration:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     env:
       APP_PORT: 18090
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install browser test dependencies
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
       - name: Start PHP and MySQL
         run: docker compose up -d --build --wait --wait-timeout 180
       - name: PHP syntax and business rules
@@ -23,7 +31,18 @@ jobs:
       - name: HTTP customer and admin flows
         run: python3 tests/http_smoke.py --base-url http://127.0.0.1:18090
       - name: JavaScript syntax
-        run: node --check public/assets/app.js
+        run: npm run check:js
+      - name: Browser interactions and responsive layouts
+        env:
+          BASE_URL: http://127.0.0.1:18090
+        run: npm run test:browser
+      - name: Browser screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-screenshots
+          path: test-results/browser
+          if-no-files-found: ignore
       - name: Container logs on failure
         if: failure()
         run: docker compose logs --no-color --tail=150

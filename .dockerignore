@@ -4,3 +4,4 @@ storage/*
 tools
 __pycache__
 test-results
+node_modules

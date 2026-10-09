@@ -4,7 +4,15 @@ Une boutique e-commerce de démonstration avec un back-office et une chaîne d�
 
 **PHP 8.4+ · MySQL 8.4 · JavaScript · Python 3.11+ · Docker Compose**
 
-![Boutique Commerce Pulse](docs/screenshots/storefront.png)
+![Boutique Commerce Pulse](docs/screenshots/hero.png)
+
+## Une boutique comme un atelier d’objets
+
+Une identité éditoriale dédiée aux essentiels du bureau : papier crème, encre noire, jaune vif et carnet bleu cobalt. La composition mêle grandes lettres, détails de catalogue, objets dessinés en SVG et grille décalée. L’inscription prend la forme d’une affiche ; l’administration reprend les mêmes repères graphiques.
+
+Les effets accompagnent la navigation : objets réactifs au pointeur, relief léger sur les produits, apparitions au défilement, ruban animé et retour visuel sur les boutons. La préférence système de réduction des mouvements est respectée, et le catalogue comme les formulaires restent utilisables sans JavaScript. Aucun service de polices ou d’images externe n’est nécessaire.
+
+Voir [les choix de design](docs/DESIGN.md) et [l’écran d’inscription](docs/screenshots/register.png).
 
 ## Ce que l’on peut essayer
 
@@ -83,7 +91,7 @@ views/          Templates PHP avec échappement HTML
 database/       Schémas MySQL / SQLite et contraintes relationnelles
 bin/            Migration, données fictives, export et démarrage local
 analytics/      Validation et agrégation Python, tests de qualité des données
-tests/          Assertions PHP et parcours HTTP
+tests/          Assertions PHP, parcours HTTP et tests navigateur
 docs/           Architecture, données, tests et guide d’entretien
 ```
 
@@ -107,7 +115,7 @@ flowchart LR
 - **SQL / MySQL** : tables relationnelles, clés étrangères, contraintes, index, agrégations et transactions.
 - **Authentification** : `password_hash`, vérification des mots de passe, rotation de session, cookies HttpOnly et contrôle des rôles.
 - **E-commerce** : panier en session, prix en centimes, snapshots des lignes de commande, annulation avec restitution du stock.
-- **JavaScript / HTML / CSS** : interface responsive, formulaires accessibles et graphique Canvas avec alternative tabulaire.
+- **JavaScript / HTML / CSS** : direction visuelle originale, interface responsive, animations progressives, formulaires accessibles et graphique Canvas avec alternative tabulaire.
 - **Python / Data junior** : contrat CSV, contrôles de qualité, reconciliation des totaux, périodes comparables et publication atomique du rapport.
 - **Git / Docker / tests** : dépôt reproductible, environnement de démonstration et vérifications automatisées.
 
@@ -126,9 +134,19 @@ python3 tests/http_smoke.py --base-url http://127.0.0.1:8090
 node --check public/assets/app.js
 ```
 
+Tests navigateur (Node.js 20+ et instance locale démarrée) :
+
+```sh
+npm ci
+npx playwright install chromium
+npm run test:browser
+```
+
+Pour utiliser Edge déjà installé sous Windows, remplacer l’installation de Chromium par `$env:BROWSER_CHANNEL='msedge'` avant `npm run test:browser`. Le script accepte `BASE_URL` pour un autre port local. Playwright est uniquement une dépendance de développement.
+
 Les tests HTTP créent quelques comptes/commandes fictifs : les exécuter sur une instance locale de démonstration. Les tests PHP de base de données refusent une base ordinaire ; ils nécessitent `APP_ENV=testing` et une base dédiée se terminant par `_test` (MySQL) ou `.test.sqlite`.
 
-Le workflow [CI](.github/workflows/ci.yml) prépare MySQL, lance les tests PHP avec une base séparée, les tests Python et les parcours client/admin HTTP. Voir [la procédure détaillée](docs/TESTING.md).
+Le workflow [CI](.github/workflows/ci.yml) prépare MySQL, lance les tests PHP avec une base séparée, les tests Python, les parcours HTTP et les interactions navigateur sur cinq largeurs d’écran. Voir [la procédure détaillée](docs/TESTING.md).
 
 ## Lire les chiffres correctement
 
