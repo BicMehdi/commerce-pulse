@@ -4,6 +4,8 @@ Une boutique e-commerce de démonstration avec un back-office et une chaîne d�
 
 **PHP 8.4+ · MySQL 8.4 · JavaScript · Python 3.11+ · Docker Compose**
 
+**Version 1.0.0 — démonstration portfolio.** Les parcours ont été vérifiés localement avec SQLite : 193 contrôles navigateur, 15 scénarios HTTP, 20 assertions PHP et 10 tests Python. La configuration Docker/MySQL est fournie ; son exécution reste à valider sur une machine avec un moteur Docker fonctionnel. Voir [les résultats et limites des tests](docs/TESTING.md).
+
 ![Boutique Commerce Pulse](docs/screenshots/hero.png)
 
 ## Une boutique comme un atelier d’objets
@@ -13,6 +15,8 @@ Une identité éditoriale dédiée aux essentiels du bureau : papier crème, enc
 Les effets accompagnent la navigation : objets réactifs au pointeur, relief léger sur les produits, apparitions au défilement, ruban animé et retour visuel sur les boutons. La préférence système de réduction des mouvements est respectée, et le catalogue comme les formulaires restent utilisables sans JavaScript. Les huit photos sont issues d’Unsplash, optimisées en WebP et stockées dans le projet : aucun service de polices ou d’images externe n’est nécessaire à l’exécution. Voir [les crédits photographiques](CREDITS.md).
 
 Voir [les choix de design](docs/DESIGN.md) et [l’écran d’inscription](docs/screenshots/register.png).
+
+Pour une visite de cinq minutes, suivre [le parcours de démonstration](docs/DEMO.md). Les changements de la version sont décrits dans [le journal des versions](CHANGELOG.md).
 
 ## Ce que l’on peut essayer
 
@@ -154,6 +158,8 @@ La « valeur commandée » est la somme des commandes non annulées, **pas un ch
 
 ## Périmètre et suites possibles
 
-Projet de démonstration en développement, réalisé avec l’assistance de Codex et destiné à être étudié, testé et amélioré par son auteur. Il reste à ajouter un serveur de production, la récupération de mot de passe, la confirmation d’email, des tests de charge/concurrence, une gestion des taxes/livraisons et éventuellement un prestataire de paiement en environnement de test. Le serveur intégré PHP et les identifiants de démonstration sont réservés au local.
+La version 1.0 couvre le parcours e-commerce simulé et l’analyse des ventes décrits ci-dessus. Le projet a été réalisé avec l’assistance de Codex et est destiné à être étudié et expliqué par son auteur.
+
+Un déploiement en production constituerait une évolution distincte : serveur adapté, récupération de mot de passe, confirmation d’email, tests de charge/concurrence, gestion des taxes/livraisons et éventuellement prestataire de paiement en environnement de test. Le serveur intégré PHP et les identifiants de démonstration sont réservés au local.
 
 Les implémentations s’appuient sur la [documentation PHP/PDO](https://www.php.net/manual/en/pdo.prepared-statements.php), les [verrous MySQL](https://dev.mysql.com/doc/refman/8.4/en/innodb-locking-reads.html), la [bibliothèque CSV Python](https://docs.python.org/3/library/csv.html) et [Docker Compose](https://docs.docker.com/compose/gettingstarted/).
