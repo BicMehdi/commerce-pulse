@@ -4,7 +4,9 @@ Une boutique e-commerce de démonstration avec un back-office et une chaîne d�
 
 **PHP 8.4+ · MySQL 8.4 · JavaScript · Python 3.11+ · Docker Compose**
 
-**Version 1.0.0 — démonstration portfolio.** Les parcours ont été vérifiés localement avec SQLite : 193 contrôles navigateur, 15 scénarios HTTP, 20 assertions PHP et 10 tests Python. La configuration Docker/MySQL est fournie ; son exécution reste à valider sur une machine avec un moteur Docker fonctionnel. Voir [les résultats et limites des tests](docs/TESTING.md).
+[![Tests](https://github.com/BicMehdi/commerce-pulse/actions/workflows/ci.yml/badge.svg)](https://github.com/BicMehdi/commerce-pulse/actions/workflows/ci.yml)
+
+**Version 1.0.0 — démonstration portfolio.** 193 contrôles navigateur, 15 scénarios HTTP, 20 assertions PHP et 10 tests Python ont réussi localement avec SQLite, puis dans GitHub Actions avec PHP 8.4, MySQL 8.4, Docker et Chromium. Voir [le run réussi](https://github.com/BicMehdi/commerce-pulse/actions/runs/38004647702) et [les résultats et limites des tests](docs/TESTING.md).
 
 ![Boutique Commerce Pulse](docs/screenshots/hero.png)
 
@@ -163,3 +165,7 @@ La version 1.0 couvre le parcours e-commerce simulé et l’analyse des ventes d
 Un déploiement en production constituerait une évolution distincte : serveur adapté, récupération de mot de passe, confirmation d’email, tests de charge/concurrence, gestion des taxes/livraisons et éventuellement prestataire de paiement en environnement de test. Le serveur intégré PHP et les identifiants de démonstration sont réservés au local.
 
 Les implémentations s’appuient sur la [documentation PHP/PDO](https://www.php.net/manual/en/pdo.prepared-statements.php), les [verrous MySQL](https://dev.mysql.com/doc/refman/8.4/en/innodb-locking-reads.html), la [bibliothèque CSV Python](https://docs.python.org/3/library/csv.html) et [Docker Compose](https://docs.docker.com/compose/gettingstarted/).
+
+## Licence
+
+Le code est distribué sous [licence MIT](LICENSE). Les photographies conservent leur licence Unsplash et leurs [crédits](CREDITS.md).

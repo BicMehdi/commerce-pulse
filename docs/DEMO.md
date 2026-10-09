@@ -38,7 +38,7 @@ Dans le dépôt, ouvrir les [décisions d’architecture](ARCHITECTURE.md), le [
 
 Les tests locaux couvrent les comptes, les permissions, les commandes, les stocks, les cas limites du panier et douze routes sur cinq tailles d’écran. Le parcours de commande fonctionne aussi sans JavaScript.
 
-L’environnement MySQL/Docker et les vérifications GitHub Actions sont préparés. Tant qu’ils n’ont pas été exécutés avec succès, présenter les résultats effectivement obtenus avec SQLite, sans revendiquer une validation de concurrence MySQL.
+Les parcours ont aussi réussi dans [GitHub Actions avec Docker, PHP 8.4, MySQL 8.4 et Chromium](https://github.com/BicMehdi/commerce-pulse/actions/runs/38004647702). La validation des parcours n’est pas un test de concurrence MySQL : une campagne dédiée reste une évolution distincte.
 
 ## Retrouver les écrans
 

@@ -18,7 +18,19 @@ Deux problèmes du panier ont été reproduits puis corrigés :
 - Un produit archivé disparaissait visuellement mais restait dans la session, le compteur et la commande. Il est maintenant retiré avec un message explicite ; la confirmation précédente est invalidée pour permettre au client de revoir le panier. Le reste de la commande peut ensuite être confirmé.
 - Les quantités décimales ou textuelles étaient converties silencieusement en entiers ; elles sont maintenant refusées sans modifier le panier. La suppression avec une quantité de zéro reste possible, même pour un produit retiré du catalogue.
 
-La configuration Compose est valide. Le moteur Docker Desktop n’a pas démarré sur cette machine ; le build Docker et les tests MySQL n’ont donc pas été exécutés localement. Le workflow GitHub Actions est préparé, mais son résultat reste à vérifier après publication.
+Le moteur Docker Desktop n’a pas démarré sur cette machine ; les vérifications Docker/MySQL ont été exécutées avec succès dans GitHub Actions après publication.
+
+## Résultat GitHub Actions — Docker / MySQL / Chromium
+
+[Le run 38004647702](https://github.com/BicMehdi/commerce-pulse/actions/runs/38004647702) s’est terminé avec la conclusion `success`, sur le commit [`8dc6061`](https://github.com/BicMehdi/commerce-pulse/commit/8dc6061bd70c5b9657aae698267e0a868b4ea60d).
+
+- Build de l’image PHP 8.4 et démarrage de Compose avec MySQL 8.4 réussis.
+- Syntaxe PHP et 20 assertions métier/base réussies sur une base MySQL dédiée.
+- 10 tests Python, 15 scénarios HTTP et contrôle de syntaxe JavaScript réussis.
+- 193 vérifications navigateur réussies dans Chromium, avec les cinq tailles d’écran et le parcours sans JavaScript.
+- Arrêt des services réussi ; aucune étape de diagnostic d’échec n’a été nécessaire.
+
+La mise à jour de documentation qui suit ce run ne change pas le code testé. Cette validation couvre les parcours fonctionnels avec MySQL ; elle ne remplace pas une campagne de concurrence ou de charge.
 
 ## Couches testées
 
@@ -38,7 +50,7 @@ docker compose exec -e APP_ENV=testing -e DB_DATABASE=commerce_pulse_test app ph
 docker compose exec -e APP_ENV=testing -e DB_DATABASE=commerce_pulse_test app php tests/run.php --database
 ```
 
-Ces mêmes étapes sont automatisées par le workflow GitHub Actions. Il faut consulter le résultat effectif du workflow avant de considérer l’environnement MySQL validé.
+Ces mêmes étapes sont automatisées par le workflow GitHub Actions. Le premier run de la version 1.0 a réussi ; consulter le résultat du workflow pour chaque future modification du code.
 
 ## SQLite sous PowerShell
 
@@ -66,7 +78,7 @@ npm run test:browser
 
 `BASE_URL` permet de choisir un autre port local. Sous PowerShell avec Edge installé, `$env:BROWSER_CHANNEL='msedge'` permet d’utiliser Edge au lieu d’installer Chromium. Les captures se trouvent dans `test-results/browser/`.
 
-Le script crée des comptes fictifs et une commande annulée. Le produit créé pour le test est ensuite archivé ; l’annulation restitue le stock commandé. Il doit être exécuté uniquement sur une démo locale. Le workflow CI utilise Chromium et le port 18090 ; cette configuration reste à confirmer par un premier run GitHub Actions.
+Le script crée des comptes fictifs et deux commandes annulées. Le produit créé pour le test est ensuite archivé ; les annulations restituent le stock commandé. Il doit être exécuté uniquement sur une démo locale. Le workflow CI utilise Chromium et le port 18090 ; cette configuration a été vérifiée dans le run lié ci-dessus.
 
 ## Ce qui reste à tester
 

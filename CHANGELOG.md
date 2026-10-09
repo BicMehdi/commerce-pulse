@@ -14,4 +14,4 @@ Première version du projet portfolio Commerce Pulse, avec un parcours e-commerc
 - Correction du panier après archivage d’un produit ; refus des quantités décimales ou textuelles.
 - Documentation du démarrage, de l’architecture, des données, de la démonstration et des vérifications.
 
-Validation locale sous Windows/PHP/SQLite : 193 contrôles navigateur, 15 scénarios HTTP, 20 assertions PHP et 10 tests Python réussis. Docker/MySQL et le workflow GitHub Actions sont fournis ; leur exécution n’a pas encore été confirmée. Cette version simule les commandes sans paiement ni livraison réels.
+Validation locale sous Windows/PHP/SQLite : 193 contrôles navigateur, 15 scénarios HTTP, 20 assertions PHP et 10 tests Python réussis. Les mêmes vérifications ont ensuite réussi dans [GitHub Actions](https://github.com/BicMehdi/commerce-pulse/actions/runs/38004647702), avec le build Docker, PHP 8.4, MySQL 8.4 et Chromium. Cette version simule les commandes sans paiement ni livraison réels.
