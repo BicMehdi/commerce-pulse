@@ -1,0 +1,44 @@
+name: commerce-pulse
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:${APP_PORT:-8090}:8000"
+    environment:
+      APP_ENV: local
+      APP_DEBUG: ${APP_DEBUG:-0}
+      APP_DEMO: ${APP_DEMO:-1}
+      DB_DRIVER: mysql
+      DB_HOST: db
+      DB_DATABASE: commerce_pulse
+      DB_USERNAME: pulse
+      DB_PASSWORD: ${DB_PASSWORD:-pulse_local_only}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-Demo-Pulse-2026!}
+      PHP_CLI_SERVER_WORKERS: 4
+    volumes:
+      - pulse-storage:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "php", "-r", "exit(@file_get_contents('http://127.0.0.1:8000/health') === false ? 1 : 0);"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: commerce_pulse
+      MYSQL_USER: pulse
+      MYSQL_PASSWORD: ${DB_PASSWORD:-pulse_local_only}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_local_only}
+    volumes:
+      - pulse-db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+volumes:
+  pulse-db:
+  pulse-storage:

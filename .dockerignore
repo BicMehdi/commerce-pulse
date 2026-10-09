@@ -1,0 +1,6 @@
+.git
+.env
+storage/*
+tools
+__pycache__
+test-results

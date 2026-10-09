@@ -1,0 +1,9 @@
+.env
+/storage/*
+!/storage/.gitkeep
+/tools/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+/test-results/
